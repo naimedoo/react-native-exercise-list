@@ -4,11 +4,23 @@ import { StyleSheet, Text, View } from 'react-native';
 import List from './Components/List';
 export default function App() {
   return (
+     <View style={[styles.container, styles.containerText]}>
+     <List style={[styles.container, styles.text]}/>
+     </View>
+   
 
-    <List/>
-    
    );
 }
+const styles = StyleSheet.create({
+  container : {
+    flex:1,
+    backgroundColor:'gray'
+  
+},
+text : {
+fontSize:30
+}
+})
 
 
 
