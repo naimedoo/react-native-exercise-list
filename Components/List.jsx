@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { View , Text, StyleSheet, SafeAreaView} from "react-native";
+import { View , Text, StyleSheet, SafeAreaView, Image} from "react-native";
 import { FlatList } from "react-native";
 
 
@@ -18,25 +18,36 @@ export default function List() {
     })
   }, [])
     const renderItem = ({ item }) => {
-    return (<View><Text style={[styles.title, styles.textCenter]}>{item}</Text></View>)
+    return (<View><Text>{item}</Text></View>)
   }
 
   return (
 
     <FlatList
-      data={countries.map((country) => {
-          return country.name.common + ': ' + country.capital
-      })}
-      renderItem={renderItem}
+    data={countries}
+      // Première méthode
+      // data={countries.map((country) => {
+      //   return <View >
+      //            <Text style={[styles.containerText,styles.title]}>Country: {country.name.common}</Text>
+      //            <Text style={[styles.containerText, styles.title]}>Capital : {country.capital}</Text>
+      //            <Image source={{uri:country.flags.svg}}style={{width:150, height: 150}}/>
+      //          </View>
+      // })}
+      renderItem={({item})=> (
+        <View>
+          <Text style={styles.title}>
+            {item.name.common}  :  {item.capital}
+          </Text>
+          <Image source={{uri:item.flags.svg}} style={{width:150, height:150}} />
+        </View>
+      )}
       keyExtractor={(item, index) => index.toString()}
     />
 
   )
 }
-const styles = StyleSheet.create({
-  title: {
-    fontSize: 20,
-  },
-
-
-});
+  const styles = StyleSheet.create({
+    title: {
+      fontSize: 20,
+    }
+  });
